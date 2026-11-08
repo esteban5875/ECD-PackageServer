@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\Repository\RepositoryIndex;
+use App\Services\Repository\RepositoryDatabase;
 use Tests\TestCase;
 
 
@@ -8,7 +8,7 @@ class InitDBTest extends TestCase
 {
     public function test_repository_database_initializes_successfully(): void
     {
-        $repository = new RepositoryIndex();
+        $repository = new RepositoryDatabase();
 
         $repository->initialize();
 

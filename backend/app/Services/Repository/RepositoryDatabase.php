@@ -2,11 +2,13 @@
 
 namespace App\Services\Repository;
 
+use App\Models\Package;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 use RuntimeException;
 
-class RepositoryIndex
+class RepositoryDatabase
 {
     private string $db;
 
@@ -47,5 +49,41 @@ class RepositoryIndex
                 "Repository migration failed: " . Artisan::output()
             );
         }
+    }
+
+    public function addEntry(array $data): Package{
+        return Package::create($data);
+    }
+
+    public function getEntry(string $id): ?Package {
+        return Package::find($id);
+    }
+
+    public function getAllEntries() : Collection {
+        return Package::all();
+    }
+
+    public function updateEntry(string $id, array $data): bool {
+        $package = Package::find($id);
+
+        if (!$package) {
+            return false;
+        }
+
+        return $package->update($data);
+    }
+
+    public function deleteEntry(string $id): bool {
+        $package = Package::find($id);
+
+        if (!$package) {
+            return false;
+        }
+
+        return (bool) $package->delete();
+    }
+
+    public function exists(string $id): bool {
+        return Package::whereKey($id)->exists();
     }
 }
