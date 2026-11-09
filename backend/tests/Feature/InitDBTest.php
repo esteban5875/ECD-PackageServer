@@ -10,8 +10,6 @@ class InitDBTest extends TestCase
     {
         $repository = new RepositoryDatabase();
 
-        $repository->initialize();
-
         $this->assertTrue(
             Schema::connection('repository')->hasTable('packages')
         );

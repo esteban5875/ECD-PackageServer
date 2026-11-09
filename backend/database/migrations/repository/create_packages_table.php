@@ -17,12 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('version');
             $table->text('description')->nullable();
-
             $table->string('filename')->unique();
             $table->unsignedBigInteger('size');
-
-            $table->timestamp('uploaded_at')->useCurrent();
-
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
             $table->unique(['name', 'version']);
         });
     }

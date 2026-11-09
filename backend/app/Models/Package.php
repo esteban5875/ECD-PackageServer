@@ -17,7 +17,6 @@ class Package extends Model
         'version',
         'description',
         'filename',
-        'checksum',
         'size',
         'uploaded_at',
     ];

@@ -15,6 +15,7 @@ class RepositoryDatabase
     public function __construct()
     {
         $this->db = dirname(base_path()) . '/repo/repository.sqlite';
+        $this->initialize();
     }
 
     
@@ -51,7 +52,7 @@ class RepositoryDatabase
         }
     }
 
-    public function addEntry(array $data): Package{
+    public function addEntry(array $data): Package {
         return Package::create($data);
     }
 
