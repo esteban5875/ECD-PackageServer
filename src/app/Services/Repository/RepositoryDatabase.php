@@ -12,10 +12,9 @@ class RepositoryDatabase
 {
     private string $db;
 
-    public function __construct()
+    public function __construct(?string $db = null)
     {
-        $this->db = dirname(base_path()) . '/repo/repository.sqlite';
-        $this->initialize();
+        $this->db = $db ?? config('repository.db_path');
     }
 
     
@@ -64,24 +63,29 @@ class RepositoryDatabase
         return Package::all();
     }
 
-    public function updateEntry(string $id, array $data): bool {
+    public function updateEntry(string $id, array $data): ?Package
+    {
         $package = Package::find($id);
 
         if (!$package) {
-            return false;
+            return null;
         }
 
-        return $package->update($data);
+        $package->update($data);
+
+        return $package;
     }
 
-    public function deleteEntry(string $id): bool {
+    public function deleteEntry(string $id): ?Package {
         $package = Package::find($id);
 
         if (!$package) {
-            return false;
+            return $package;
         }
 
-        return (bool) $package->delete();
+        $package->delete();
+
+        return $package;
     }
 
     public function exists(string $id): bool {

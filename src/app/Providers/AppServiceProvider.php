@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Repository\RepositoryDatabase;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        config([
+            'database.connections.repository.database' => config('repository.db_path'),
+        ]);
+        $this->app->singleton(RepositoryDatabase::class, function () {
+            $repository = new RepositoryDatabase();
+            $repository->initialize();
+
+            return $repository;
+        });
     }
 
     /**
@@ -19,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+    
     }
 }

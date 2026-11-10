@@ -13,11 +13,12 @@ class Package extends Model
     protected $table = 'packages';
 
     protected $fillable = [
-        'name',
-        'version',
-        'description',
+        'name' ,
+        'version' ,
+        'description' ,
         'filename',
         'size',
-        'uploaded_at',
+        'created_at' ,
+        'updated_at'
     ];
 }

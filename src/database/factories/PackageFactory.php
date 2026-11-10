@@ -21,10 +21,8 @@ class PackageFactory extends Factory
             'name' => $name,
             'version' => $version,
             'description' => fake()->sentence(),
-            'filename' => "{$name}-{$version}.tar.gz",
+            'filename'    => fn (array $attributes) => "{$attributes['name']}-{$attributes['version']}.tar.gz",
             'size' => fake()->numberBetween(1024, 50_000_000),
-            'created_at' => now(),
-            'updated_at'  => now()
         ];
     }
 }
