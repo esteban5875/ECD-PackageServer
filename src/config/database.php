@@ -33,7 +33,7 @@ return [
     'connections' => [
         'repository' => [
             'driver' => 'sqlite',
-            'database' => dirname(base_path() . '/repo/repository.sqlite'),
+            'database' => dirname(base_path()) . '/repo/repository.sqlite',
             'prefix' => '',
             'foreign_key_constraints' => true,
         ],
